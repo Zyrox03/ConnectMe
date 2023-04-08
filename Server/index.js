@@ -84,13 +84,14 @@ app.use((req, res, next) => {
   next();
 })
 
- 
+
 
 
 
 // MONGO SETUP
 
-const port = process.env.PORT || 6001 
+const port = process.env.PORT || 6001
+const HOST = '0.0.0.0';
 const Mongo_url = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/ZyMedia'
 
 mongoose.set("strictQuery", false);
@@ -124,4 +125,4 @@ app.use((err, req, res, next) => {
 })
 
 
-app.listen(port, () => console.log('SERVER PORT :', port))
+app.listen(port, HOST, () => console.log(`Server listening on ${HOST}:${port}`))
