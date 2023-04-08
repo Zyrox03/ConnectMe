@@ -11,7 +11,7 @@ const PostsWidget = ({ userID }) => {
 
   
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
+    const response = await fetch("https://connectme-upsk.onrender.com/posts", {
       method: "GET",
       //   headers: { Authorization: `Bearer ${token}` },
     });
@@ -21,7 +21,7 @@ const PostsWidget = ({ userID }) => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `http://localhost:3001/posts/${userID}/posts`,
+      `https://connectme-upsk.onrender.com/posts/${userID}/posts`,
       {
         method: "GET",
         // headers: { Authorization: `Bearer ${token}` },

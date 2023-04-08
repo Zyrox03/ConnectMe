@@ -36,7 +36,7 @@ import {
     const main = palette.neutral.main;
     const primary = palette.primary.main;
     const patchLike = async () => {
-      const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+      const response = await fetch(`https://connectme-upsk.onrender.com/posts/${postId}/like`, {
         method: "PATCH",
         headers: {
           // Authorization: `Bearer ${token}`,

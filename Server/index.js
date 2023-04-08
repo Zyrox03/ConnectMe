@@ -106,7 +106,9 @@ async function main() {
 
 
 
-
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
 app.use('/auth', authRoutes)
 app.use('/users', userRoutes)

@@ -69,7 +69,7 @@ const Form = () => {
 
 
     const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
+      "https://connectme-upsk.onrender.com/auth/register",
       {
         method: 'POST',
         body: formData
@@ -101,7 +101,7 @@ const Form = () => {
   const login = async (values, onSubmitProps) => {
     try{
 
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+    const loggedInResponse = await fetch("https://connectme-upsk.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
@@ -132,7 +132,7 @@ catch(err){
 }
   };
   const logout = async () => {
-    const loggedOutResponse = await fetch("http://localhost:3001/auth/logout", {
+    const loggedOutResponse = await fetch("https://connectme-upsk.onrender.com/auth/logout", {
       method: "GET",
     });
     const loggedOut = await loggedOutResponse.json();
