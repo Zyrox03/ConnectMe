@@ -1,10 +1,38 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form.jsx";
+import { useLocation } from "react-router-dom";
+import queryString from 'query-string'
+import { useDispatch } from "react-redux";
+import { logUser } from "../../state/authSlice.js";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const theme = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
+  const VerifySuccessPage = async() => {
+    const location = useLocation();
+    const { user } = queryString.parse(location.search);
+  if(user){
+
+    const userData = await JSON.parse(decodeURIComponent(user));
+ 
+    dispatch(
+      logUser({
+        user: userData,
+        token: true,
+      })
+    );
+    navigate("/home");
+  }
+  };
+  VerifySuccessPage()
+  
+
   return (
     <Box>
       <Box

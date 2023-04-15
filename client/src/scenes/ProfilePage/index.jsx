@@ -19,9 +19,9 @@ const ProfilePage = () => {
   const {picturePath : {path}} = useSelector((state) => state.auth.user);
 
   const isProfile = useSelector((state) => state.auth.isProfile);
-
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userID}`, {
+    // https://bloom-pickled-pleasure.glitch.me
+    const response = await fetch(`https://woozy-kindhearted-brie.glitch.me/users/${userID}`, {
       method: "GET",
     //   headers: { Authorization: `Bearer ${token}` },
     });

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../../state/authSlice.js";
 import PostWidget from "./PostWidget.jsx";
+import WidgetWrapper from "../../components/WidgetWrapper.jsx";
 import React from "react";
 const PostsWidget = ({ userID }) => {
   const dispatch = useDispatch();
@@ -11,24 +12,32 @@ const PostsWidget = ({ userID }) => {
 
   
   const getPosts = async () => {
-    const response = await fetch("https://connectme-upsk.onrender.com/posts", {
+    const response = await fetch("https://woozy-kindhearted-brie.glitch.me/posts", {
       method: "GET",
       //   headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    dispatch(setPosts({ posts: data }));
+
+    if(!data.error){
+      dispatch(setPosts({ posts: data }));
+    }
+
   };
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `https://connectme-upsk.onrender.com/posts/${userID}/posts`,
+      `https://woozy-kindhearted-brie.glitch.me/posts/${userID}/posts`,
       {
         method: "GET",
         // headers: { Authorization: `Bearer ${token}` },
       }
     );
+    // {username : "justzyrox03@gmail.com"}
     const data = await response.json();
-    dispatch(setPosts({ posts: data }));
+    
+    if(!data.error){
+      dispatch(setPosts({ posts: data }));
+    }
   };
 
   useEffect(() => {
@@ -41,7 +50,7 @@ const PostsWidget = ({ userID }) => {
 
   return (
     <>
-      {posts && posts.map(
+{posts ? posts.map(
         ({
           _id,
           userID,
@@ -52,6 +61,7 @@ const PostsWidget = ({ userID }) => {
           picturePath,
           userPicturePath,
           likes,
+          createdAt,
           comments,
         }) => (
           <PostWidget
@@ -64,11 +74,17 @@ const PostsWidget = ({ userID }) => {
             picturePath={picturePath}
             userPicturePath={userPicturePath}
             likes={likes}
+            createdAt={createdAt}
             comments={comments}
           />
         )
       )
+      :
+      <WidgetWrapper>
+        Be the first to post in ConnectMe
+      </WidgetWrapper>
       }
+
     </>
   );
 };

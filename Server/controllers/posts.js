@@ -1,6 +1,6 @@
 import User from '../models/User.js'
 import catchAsync from '../utils/catchAsync.js'
-
+import { v2 as cloudinary } from "cloudinary";
 import Post from '../models/Post.js'
 
 
@@ -22,7 +22,8 @@ export const createPost = catchAsync(async (req, res) => {
 
         })
         if (req.file) {
-            newPost.picturePath = req.file.path
+            newPost.picturePath.path = req.file.path
+            newPost.picturePath.filename = req.file.filename
         }
 
         await newPost.save()
@@ -44,12 +45,27 @@ export const createPost = catchAsync(async (req, res) => {
 export const deletePost = catchAsync(async (req, res) => {
     try {
         const { postID } = req.params
-        const deletedPost = await Post.findByIdAndDelete(postID)
+        const toDelete = await Post.findById(postID)
 
-
-
+        if (!toDelete) {
+            return res.status(404).json({ error: 'Post not found' });
+          }
+        // Delete image from Cloudinary
+       
+        
+        // Delete post from database
+        const deleted = await Post.findByIdAndDelete(postID);
+        if(deleted.picturePath && deleted.picturePath.filename ){
+            const deleteResult = await cloudinary.uploader.destroy(deleted.picturePath.filename);
+        }
         const post = await Post.find().sort({ createdAt: -1 })
-        res.status(200).json(post)
+        if(post){
+            res.status(200).json(post)
+
+        }else{
+            res.status(200).json(post = [])
+
+        }
     } catch (e) {
         res.status(500).json(e)
 

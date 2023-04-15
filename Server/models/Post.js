@@ -21,7 +21,10 @@ const postSchema = Schema({
     },
     description: String,
     userPicturePath: String,
-    picturePath: String,
+    picturePath: {
+        path :String,
+        filename: String
+    },
 
     likes: {
         type: Map,

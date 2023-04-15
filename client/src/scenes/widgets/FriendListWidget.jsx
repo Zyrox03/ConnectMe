@@ -12,7 +12,7 @@ const FriendListWidget = ({ userId }) => {
     const friends = useSelector((state) => state.auth.user.friends);
     const getFriends = async () => {
         const response = await fetch(
-            `https://connectme-upsk.onrender.com/users/${userId}/friends`,
+            `https://woozy-kindhearted-brie.glitch.me/users/${userId}/friends`,
             {
                 method: "GET",
                 // headers: { Authorization: `Bearer ${token}` },
@@ -45,12 +45,14 @@ const FriendListWidget = ({ userId }) => {
                         name={`${friend.firstName} ${friend.lastName}`}
                         subtitle={friend.occupation}
                         userPicturePath={friend.picturePath.path}
+                        isPost={false}
+
                     />
                 ))
                     :
 
                     <p>No friends added</p>
-    }
+                }
             </Box>
         </WidgetWrapper>
     );

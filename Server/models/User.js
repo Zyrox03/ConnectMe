@@ -39,6 +39,7 @@ const userSchema = new Schema(
         occupation: String,
         viewedProfile: Number,
         impressions: Number,
+        verified : Boolean
     },
     { timestamps: true }
 )

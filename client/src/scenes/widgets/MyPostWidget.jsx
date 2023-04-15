@@ -1,4 +1,5 @@
 import React from "react";
+import {HashLoader} from 'react-spinners'
 import {
     EditOutlined,
     DeleteOutlined,
@@ -32,6 +33,7 @@ import {
     const navigate = useNavigate()
     const [isImage, setIsImage] = useState(false);
     const [image, setImage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
     const [post, setPost] = useState("");
     const { palette } = useTheme();
     const { _id } = useSelector((state) => state.auth.user);
@@ -41,6 +43,7 @@ import {
     const medium = palette.neutral.medium;
   
     const handlePost = async () => {
+      setIsLoading(true)
       const formData = new FormData();
       formData.append("userID", _id);
       formData.append("description", post);
@@ -48,10 +51,13 @@ import {
         formData.append("picturePath", image);
       }
   
-      const response = await fetch(`https://connectme-upsk.onrender.com/posts`, {
+      const response = await fetch(`https://woozy-kindhearted-brie.glitch.me/posts`, {
         method: "POST",
         body: formData,
       });
+      setIsLoading(false)
+
+      
       const data = await response.json();
       dispatch(setPosts({ posts : data }));
       setImage(null);
@@ -60,7 +66,9 @@ import {
     };
   
     return (
-      <WidgetWrapper>
+      <WidgetWrapper className={isLoading ? 'loading': ''}>
+    <HashLoader cssOverride={{ position: 'absolute',zIndex:'999', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} color="#36D7B7" loading={isLoading} />
+
         <FlexBetween gap="1.5rem">
           <UserImage image={picturePath} />
           <InputBase
@@ -68,11 +76,17 @@ import {
             onChange={(e) => setPost(e.target.value)}
             value={post}
             sx={{
-              width: "100%",
+              width: '100%',
               backgroundColor: palette.neutral.light,
-              borderRadius: "2rem",
-              padding: "1rem 2rem",
+              borderRadius: '2rem',
+              padding: '1rem 2rem',
+              whiteSpace: 'pre-wrap', // allow wrapping of long words
+              wordWrap: 'break-word', // allow wrapping of long words
+              overflowWrap: 'break-word', // allow wrapping of long words
+              resize: 'vertical', // enable vertical resizing
             }}
+            multiline={true}
+            rows={2}
           />
         </FlexBetween>
         {isImage && (
@@ -98,7 +112,7 @@ import {
                   >
                     <input {...getInputProps()} />
                     {!image ? (
-                      <p>Add Image Here</p>
+                      <Typography>Add Image Here</Typography>
                     ) : (
                       <FlexBetween>
                         <Typography>{image.name}</Typography>
@@ -135,7 +149,7 @@ import {
   
           {isNonMobileScreens ? (
             <>
-              <FlexBetween gap="0.25rem">
+              {/* <FlexBetween gap="0.25rem">
                 <GifBoxOutlined sx={{ color: mediumMain }} />
                 <Typography color={mediumMain}>Clip</Typography>
               </FlexBetween>
@@ -148,7 +162,7 @@ import {
               <FlexBetween gap="0.25rem">
                 <MicOutlined sx={{ color: mediumMain }} />
                 <Typography color={mediumMain}>Audio</Typography>
-              </FlexBetween>
+              </FlexBetween> */}
             </>
           ) : (
             <FlexBetween gap="0.25rem">
@@ -157,7 +171,7 @@ import {
           )}
   
           <Button
-            disabled={!post}
+            disabled={!post || post.trim() === ''}
             onClick={handlePost}
             sx={{
               color: palette.background.alt,

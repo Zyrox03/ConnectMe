@@ -1,5 +1,5 @@
 import express from 'express'
-import { isLoggedIn } from '../middleware/middleware.js'
+import { isLoggedIn ,ensureVerified} from '../middleware/middleware.js'
 import { getUser, getUserFriends, addRemoveFriend } from '../controllers/users.js'
 const router = express.Router();
 

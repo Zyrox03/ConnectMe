@@ -1,6 +1,6 @@
 import express from "express";
 import { createPost, getFeedPosts, getUserPosts, likePost, deletePost } from '../controllers/posts.js'
-import { isLoggedIn } from '../middleware/middleware.js'
+import { isLoggedIn , ensureVerified} from '../middleware/middleware.js'
 
 
 import multer from 'multer'

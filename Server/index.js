@@ -16,8 +16,9 @@ import postRoutes from './routes/posts.js'
 import passport from 'passport'
 import LocalStrategy from 'passport-local'
 
-import User from './models/User.js'
+import cron from 'node-cron';
 
+import User from './models/User.js'
 
 
 
@@ -115,8 +116,12 @@ app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
 app.use('/posts', postRoutes)
 
-
-
+const deleteUnverifiedUsers = async () => {
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000); // 1 hour ago
+  const unverifiedUsers = await User.deleteMany({ verified: false, createdAt: { $lt: oneHourAgo } });
+  console.log(`${unverifiedUsers.deletedCount} unverified users deleted.`);
+};
+cron.schedule('0 * * * *', deleteUnverifiedUsers);
 
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;

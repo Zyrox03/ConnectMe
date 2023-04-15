@@ -44,7 +44,7 @@ const HomePage = () => {
 
                 {isNonMobileScreens && (
           <Box flexBasis="26%">
-            <Link to={'https://fitclub-1my.pages.dev'} target="_blank" style={{ textDecoration: 'none' }}><AdvertWidget /></Link>
+            <Link to={'https://zyfitclub.pages.dev'} target="_blank" style={{ textDecoration: 'none' }}><AdvertWidget /></Link>
             
             <Box m="2rem 0" />
             <FriendListWidget userId={_id} />

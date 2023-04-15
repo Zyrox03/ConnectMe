@@ -9,14 +9,13 @@ import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from './theme.js'
-
+import './App.css'
 export default function App() {
-
 
     const mode = useSelector(state => state.auth.mode)
     const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
     const isAuth = Boolean(useSelector((state) => state.auth.token));
-    const user = useSelector((state) => state.auth.user)
+    
 
     return (
         <div className="app">
