@@ -59,7 +59,6 @@ const UserWidget = ({ userId, picturePath }) => {
     friends,
   } = user;
 
-  console.log("users", user);
   const fakeUser = {
     username: "zyrox03",
     followers: 1000,

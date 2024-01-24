@@ -1,4 +1,4 @@
-import { Box, useMediaQuery } from "@mui/material";
+import {  Box, useMediaQuery } from "@mui/material";
 import React from "react";
 import Navbar from "../navBar/index.jsx";
 import UserWidget from "../../scenes/widgets/UserWidget.jsx";
@@ -9,7 +9,6 @@ import FriendListWidget from "../../scenes/widgets/FriendListWidget.jsx";
 import { Link } from "react-router-dom";
 import { setProfile } from "../../state/authSlice.js";
 import { useSelector, useDispatch } from "react-redux";
-import StoriesWidget from "../widgets/StoriesWidget.jsx";
 import NavigationWidget from "../widgets/NavigationWidget.jsx";
 
 const HomePage = () => {
@@ -20,18 +19,17 @@ const HomePage = () => {
     picturePath: { path },
   } = useSelector((state) => state.auth.user);
   const isProfile = useSelector((state) => state.auth.isProfile);
-  dispatch(setProfile(false));
+  dispatch(setProfile('friendsPosts'));
 
   return (
-    <Box>
+    <Box >
 
-    {!isNonMobileScreens && (
       <Navbar />
-
-    )}
+    {/* {!isNonMobileScreens && ( */}
+      {/* )} */}
       <Box
         sx={{
-          paddingTop: `${!isNonMobileScreens && "5em"}`
+          paddingTop: `${!isNonMobileScreens ? "5em" : "7em"}`
         }}
 
         width="100%"
@@ -72,9 +70,8 @@ const HomePage = () => {
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <StoriesWidget />
           <MyPostWidget picturePath={path} />
-          <PostsWidget userId={_id} />
+          <PostsWidget userID={_id} />
         </Box>
 
         {isNonMobileScreens && (
@@ -99,8 +96,7 @@ const HomePage = () => {
             }}
             >
 
-<FriendListWidget userId={_id} />
-
+{/* <FriendListWidget userId={_id} /> */}
 
               <Link
                 to={"https://zyfitclub.pages.dev"}
@@ -114,6 +110,8 @@ const HomePage = () => {
           </Box>
         )}
       </Box>
+    {/* <BottomNavBar/> */}
+
     </Box>
   );
 };

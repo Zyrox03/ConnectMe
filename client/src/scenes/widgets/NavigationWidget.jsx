@@ -4,7 +4,7 @@ import {
   EditOutlined,
   LocationOnOutlined,
   WorkOutlineOutlined,
-  BookmarkAdd,
+  BookmarkAdded,
   Settings,
   Inbox,
   Explore,
@@ -48,7 +48,7 @@ const NavigationWidget = ({ userId, picturePath }) => {
     { name: "Home", icon: <Home />, link: "/home" },
     { name: "Explore", icon: <Explore />, link: "/explore" },
     { name: "Inbox", icon: <Inbox />, link: "/inbox" },
-    { name: "Saved", icon: <BookmarkAdd />, link: "/saved" },
+    { name: "Saved", icon: <BookmarkAdded />, link: "/saved" },
     { name: "Settings", icon: <Settings />, link: "/settings" },
   ];
 

@@ -66,25 +66,29 @@ const Friend = ({ friendId, name, subtitle, userPicturePath, postID, createdAt, 
 
   let iconButton
 
-  if(isProfile){
-    iconButton = null
-  }else{
+//   if(isProfile === 'profile'){
+//     iconButton = null
+//   }else{
 
-  if (friendId !== _id ) {
-    (
-      iconButton = (
-      <IconButton
-        onClick={() => patchFriend()}
-        sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
-      >
-        {isFriend ? (
-          <PersonRemoveOutlined sx={{ color: primaryDark }} />
-        ) : (
-          <PersonAddOutlined sx={{ color: primaryDark }} />
-        )}
-      </IconButton>)
-    )
-  } else {
+// }
+
+
+if (friendId !== _id  ) {
+  (
+    iconButton = (
+    <IconButton
+      onClick={() => patchFriend()}
+      sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+    >
+      {isFriend ? (
+        <PersonRemoveOutlined sx={{ color: primaryDark }} />
+      ) : (
+        <PersonAddOutlined sx={{ color: primaryDark }} />
+      )}
+    </IconButton>)
+  )
+} else {
+  if(isProfile === 'profile') {
     iconButton = (
       <IconButton
         onClick={deletePost}

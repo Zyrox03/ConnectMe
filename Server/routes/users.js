@@ -1,13 +1,18 @@
-import express from 'express'
-import { isLoggedIn ,ensureVerified} from '../middleware/middleware.js'
-import { getUser, getUserFriends, addRemoveFriend } from '../controllers/users.js'
+import express from "express";
+import { isLoggedIn, ensureVerified } from "../middleware/middleware.js";
+import {
+  getUser,
+  getUserFriends,
+  addRemoveFriend,
+  updateSavedPosts,
+} from "../controllers/users.js";
 const router = express.Router();
-
 
 // READ
 
-router.get('/:id', getUser)
-router.get('/:id/friends', getUserFriends)
-router.patch('/:id/:friendID', addRemoveFriend)
+router.get("/:id", getUser);
+router.patch("/:id/updateSaved/:postID", updateSavedPosts);
+router.get("/:id/friends", getUserFriends);
+router.patch("/:id/:friendID", addRemoveFriend);
 
-export default router
+export default router;
