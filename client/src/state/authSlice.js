@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  mode: "light",
+  mode: "dark",
   user: null,
   token: null,
   posts: [],
-  isProfile: "friendsPosts",
+  isProfile: "",
 };
 
 export const authSlice = createSlice({

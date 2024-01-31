@@ -8,6 +8,7 @@ import MyPostWidget from "../../scenes/widgets/MyPostWidget.jsx";
 import PostsWidget from "../../scenes/widgets/PostsWidget.jsx";
 import UserWidget from "../../scenes/widgets/UserWidget.jsx";
 import { setPosts, setProfile } from "../../state/authSlice.js";
+import BottomNavigationBar from "../bottomNavBar/index.jsx";
 
 const PostPage = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,9 @@ const PostPage = () => {
           <PostsWidget userID={userID} />
         </Box>
       </Box>
+
+      <BottomNavigationBar />
+
     </Box>
   );
 };

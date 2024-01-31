@@ -1,4 +1,4 @@
-import {  Box, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import React from "react";
 import Navbar from "../navBar/index.jsx";
 import UserWidget from "../../scenes/widgets/UserWidget.jsx";
@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { setProfile } from "../../state/authSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import NavigationWidget from "../widgets/NavigationWidget.jsx";
+import BottomNavigationBar from "../bottomNavBar/index.jsx";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -19,19 +20,17 @@ const HomePage = () => {
     picturePath: { path },
   } = useSelector((state) => state.auth.user);
   const isProfile = useSelector((state) => state.auth.isProfile);
-  dispatch(setProfile('friendsPosts'));
+  dispatch(setProfile("friendsPosts"));
 
   return (
-    <Box >
-
+    <Box>
       <Navbar />
-    {/* {!isNonMobileScreens && ( */}
+      {/* {!isNonMobileScreens && ( */}
       {/* )} */}
       <Box
         sx={{
-          paddingTop: `${!isNonMobileScreens ? "5em" : "7em"}`
+          paddingTop: `${!isNonMobileScreens ? "5em" : "7em"}`,
         }}
-
         width="100%"
         padding="2rem 1rem"
         display={isNonMobileScreens ? "flex" : "block"}
@@ -50,7 +49,7 @@ const HomePage = () => {
             flexDirection="column"
             overflow="scroll"
             gap="0.5rem"
-            maxHeight='calc(95vh)'
+            maxHeight="calc(95vh)"
             sx={{
               "&::-webkit-scrollbar": {
                 width: "0", // Adjust as needed
@@ -76,27 +75,24 @@ const HomePage = () => {
 
         {isNonMobileScreens && (
           <Box position="relative" flexBasis="26%">
-
-
-           <Box
-            position="fixed"
-            width={isNonMobileScreens ? "26%" : "100%"}
-            display="flex"
-            flexDirection="column"
-            overflow="scroll"
-            gap="0.5rem"
-            maxHeight='calc(95vh)'
-            sx={{
-              "&::-webkit-scrollbar": {
-                width: "0", // Adjust as needed
-              },
-              "&::-webkit-scrollbar-thumb": {
-                backgroundColor: "transparent",
-              },
-            }}
+            <Box
+              position="fixed"
+              width={isNonMobileScreens ? "26%" : "100%"}
+              display="flex"
+              flexDirection="column"
+              overflow="scroll"
+              gap="0.5rem"
+              maxHeight="calc(95vh)"
+              sx={{
+                "&::-webkit-scrollbar": {
+                  width: "0", // Adjust as needed
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: "transparent",
+                },
+              }}
             >
-
-{/* <FriendListWidget userId={_id} /> */}
+              {/* <FriendListWidget userId={_id} /> */}
 
               <Link
                 to={"https://zyfitclub.pages.dev"}
@@ -105,13 +101,11 @@ const HomePage = () => {
               >
                 <AdvertWidget />
               </Link>
-              
             </Box>
           </Box>
-        )}
+        ) }
       </Box>
-    {/* <BottomNavBar/> */}
-
+<BottomNavigationBar/>
     </Box>
   );
 };

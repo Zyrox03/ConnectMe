@@ -7,9 +7,46 @@ import catchAsync from "../utils/catchAsync.js";
 
 export const getUser = catchAsync(async (req, res) => {
   const { id } = req.params;
+
+  // Find the user by ID
   const user = await User.findById(id);
 
-  res.status(200).json(user);
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  // Count total likes
+
+  // Aggregate total likes
+  const totalLikesAggregation = await Post.aggregate([
+    { $match: { userID: id } },
+    {
+      $group: {
+        _id: null,
+        totalLikes: { $sum: { $size: { $objectToArray: "$likes" } } },
+      },
+    },
+  ]);
+
+  // Extract the total likes from the aggregation result
+  const totalLikes = totalLikesAggregation.length > 0 ? totalLikesAggregation[0].totalLikes : 0;
+
+  // Count total friends
+  const totalFriends = user.friends.length;
+
+  // Count total posts
+  const totalPosts = await Post.countDocuments({ userID: id });
+
+  // Create an object with the user data and counts
+  const userDataWithCounts = {
+    ...user.toObject(),
+    totalLikes,
+    totalFriends,
+    totalPosts,
+  };
+
+  console.log(userDataWithCounts)
+  res.status(200).json(userDataWithCounts);
 });
 // READ FRIENDS
 

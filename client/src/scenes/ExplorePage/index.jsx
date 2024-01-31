@@ -8,6 +8,7 @@ import MyPostWidget from "../../scenes/widgets/MyPostWidget.jsx";
 import PostsWidget from "../../scenes/widgets/PostsWidget.jsx";
 import UserWidget from "../../scenes/widgets/UserWidget.jsx";
 import { setProfile } from "../../state/authSlice.js";
+import BottomNavigationBar from "../bottomNavBar/index.jsx";
 
 const ExplorePage = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const ExplorePage = () => {
   //   const token = useSelector((state) => state.auth.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
-  dispatch(setProfile('feedPosts'));
+  dispatch(setProfile("feedPosts"));
 
   const {
     picturePath: { path },
@@ -38,6 +39,7 @@ const ExplorePage = () => {
   return (
     <Box>
       <Navbar />
+
       <Box
         width="100%"
         padding="2rem 6%"
@@ -53,9 +55,11 @@ const ExplorePage = () => {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <Box m="2rem 0" />
-          <PostsWidget userID={userID}  />
+          <PostsWidget userID={userID} />
         </Box>
       </Box>
+      <BottomNavigationBar />
+
     </Box>
   );
 };

@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost, setSavedPosts } from "../../state/authSlice.js";
 import { useNavigate } from "react-router-dom";
+import DOMPurify from 'dompurify';
 
 const PostWidget = ({
   postId,
@@ -28,8 +29,8 @@ const PostWidget = ({
   likes,
   comments,
 }) => {
-  const string = description;
-  const formattedString = string.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
+  // const formattedString = description.replace(/(?:\r\n|\r|\n){2,}/g, '<br/>\n').replace(/\r\n|\r|\n/g, '<br/>');
+  const sanitizedHTML = DOMPurify.sanitize(description);
 
   // const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
@@ -112,9 +113,9 @@ const PostWidget = ({
       <Typography
         color={main}
         sx={{ mt: "1rem", height: "fit-content", whiteSpace: "pre-wrap" }}
-      >
-        {formattedString}
-      </Typography>
+        dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+
+      />
       {picturePath && (
         <img
           width="100%"
@@ -152,7 +153,7 @@ const PostWidget = ({
 
         <Box>
           <IconButton onClick={savePost}>
-            {savedPosts.includes(postId) ? (
+            {savedPosts?.includes(postId) ? (
               <BookmarkAdd sx={{ color: primary }} />
             ) : (
               <BookmarkAddOutlined />

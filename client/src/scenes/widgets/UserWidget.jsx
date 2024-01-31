@@ -59,11 +59,11 @@ const UserWidget = ({ userId, picturePath }) => {
     friends,
   } = user;
 
-  const fakeUser = {
-    username: "zyrox03",
-    followers: 1000,
-    posts: 50,
-    totalLikes: 5000,
+  const userInfo = {
+    username: user?.identifier || `${firstName + lastName}`, // to fix and put real identifier tag
+    friends: user.totalFriends,
+    posts: user.totalPosts,
+    totalLikes: user.totalLikes,
   };
 
   return (
@@ -93,20 +93,20 @@ const UserWidget = ({ userId, picturePath }) => {
             >
               {firstName} {lastName}
             </Typography>
-            <Typography variant="subtitle1">@{fakeUser.username}</Typography>
+            <Typography variant="subtitle1">@{userInfo.username}</Typography>
 
             <Box width="100%" mt="1.5rem">
               <Grid container spacing={2}>
                 <Grid item xs={4}>
-                  <Typography variant="h6">{fakeUser.followers}</Typography>
-                  <Typography variant="body2">Followers</Typography>
+                  <Typography variant="h6">{userInfo.friends}</Typography>
+                  <Typography variant="body2">Friends</Typography>
                 </Grid>
                 <Grid item xs={4}>
-                  <Typography variant="h6">{fakeUser.posts}</Typography>
+                  <Typography variant="h6">{userInfo.posts}</Typography>
                   <Typography variant="body2">Posts</Typography>
                 </Grid>
                 <Grid item xs={4}>
-                  <Typography variant="h6">{fakeUser.totalLikes}</Typography>
+                  <Typography variant="h6">{userInfo.totalLikes}</Typography>
                   <Typography variant="body2">Total Likes</Typography>
                 </Grid>
               </Grid>

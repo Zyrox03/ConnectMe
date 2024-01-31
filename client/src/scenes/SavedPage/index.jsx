@@ -8,16 +8,17 @@ import MyPostWidget from "../../scenes/widgets/MyPostWidget.jsx";
 import PostsWidget from "../../scenes/widgets/PostsWidget.jsx";
 import UserWidget from "../../scenes/widgets/UserWidget.jsx";
 import { setProfile } from "../../state/authSlice.js";
+import BottomNavigationBar from "../bottomNavBar/index.jsx";
 
 const SavedPage = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(null);
 
-  const userID = useSelector(state=>state.auth.user._id)
+  const userID = useSelector((state) => state.auth.user._id);
   //   const token = useSelector((state) => state.auth.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
-  dispatch(setProfile('savedPosts'));
+  dispatch(setProfile("savedPosts"));
 
   const {
     picturePath: { path },
@@ -54,9 +55,11 @@ const SavedPage = () => {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <Box m="2rem 0" />
-          <PostsWidget userID={userID}  />
+          <PostsWidget userID={userID} />
         </Box>
       </Box>
+
+      <BottomNavigationBar />
     </Box>
   );
 };

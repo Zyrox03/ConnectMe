@@ -1,4 +1,4 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { BottomNavigation, Box, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import MyPostWidget from "../../scenes/widgets/MyPostWidget.jsx";
 import PostsWidget from "../../scenes/widgets/PostsWidget.jsx";
 import UserWidget from "../../scenes/widgets/UserWidget.jsx";
 import { setProfile } from "../../state/authSlice.js";
+import BottomNavigationBar from "../bottomNavBar/index.jsx";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -31,11 +32,13 @@ const ProfilePage = () => {
       }
     );
     const data = await response.json();
+
+    console.log(data);
     setUser(data);
   };
 
   useEffect(() => {
-    dispatch(setProfile('profile'));
+    dispatch(setProfile("profile"));
 
     getUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -45,15 +48,15 @@ const ProfilePage = () => {
   return (
     <Box>
       <Navbar />
+
       <Box
         width="100%"
         padding="2rem 6%"
         display={isNonMobileScreens ? "flex" : "block"}
         gap="2rem"
         justifyContent="center"
-
         sx={{
-          paddingTop: `${!isNonMobileScreens ? "5em" : "7em"}`,
+          paddingTop: "7em",
         }}
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
@@ -70,6 +73,7 @@ const ProfilePage = () => {
           <PostsWidget userID={userID} isProfile={isProfile} />
         </Box>
       </Box>
+      <BottomNavigationBar />
     </Box>
   );
 };

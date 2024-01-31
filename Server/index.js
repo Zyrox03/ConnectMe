@@ -93,8 +93,8 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 3000
 const HOST = '0.0.0.0';
-// process.env.MONGO_URL || 
-const Mongo_url = 'mongodb://127.0.0.1:27017/ConnectMe'
+// 
+const Mongo_url = process.env.MONGO_URL ||  'mongodb://127.0.0.1:27017/ConnectMe'
 
 mongoose.set("strictQuery", false);
 main().catch(err => console.log(err));
