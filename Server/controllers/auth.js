@@ -297,7 +297,7 @@ export const renderReset = catchAsync(async (req, res) => {
         // res.status(200).json({ userId: user.userID, uniqueString });
         return res.redirect(`${process.env.GLITCH_API}/?resetP=${user.userID}`);
 
-    }
+    } 
     catch (err) {
         res.status(500).send({ message: err.message });
     }

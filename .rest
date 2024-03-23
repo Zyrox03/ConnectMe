@@ -1,0 +1,7 @@
+POST https://connectme-production-2b6c.up.railway.app/auth/resetPassword
+Content-Type: application/json
+
+{
+  "resetP": "643b2b2edb36d600c175eed9",
+  "password": "Baragay123"
+}

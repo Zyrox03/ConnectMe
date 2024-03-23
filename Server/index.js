@@ -122,7 +122,7 @@ const deleteUnverifiedUsers = async () => {
   const unverifiedUsers = await User.deleteMany({ verified: false, createdAt: { $lt: oneHourAgo } });
   console.log(`${unverifiedUsers.deletedCount} unverified users deleted.`);
 };
-cron.schedule('0 * * * *', deleteUnverifiedUsers);
+// cron.schedule('0 * * * *', deleteUnverifiedUsers);
 
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
